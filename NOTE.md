@@ -81,3 +81,32 @@
     - パーサージェネレータには種類がある LR / LALR / LL
       - 扱える記法の広さと生成速度・シンプルさのトレードオフ
       - OpenCC は LL パーサジェネレーター
+
+    ```
+    root ➜ /w/examples $ javacc Adder.jj
+    Java Compiler Compiler Version 5.0 (Parser Generator)
+    (type "javacc" with no arguments for help)
+    Reading from file Adder.jj . . .
+    File "TokenMgrError.java" is being rebuilt.
+    File "ParseException.java" is being rebuilt.
+    File "Token.java" is being rebuilt.
+    File "SimpleCharStream.java" is being rebuilt.
+    Parser generated successfully.
+    root ➜ /w/examples $ ls Adder.*
+    Adder.java  Adder.jj
+    root ➜ /w/examples $ javac Adder.java
+    root ➜ /w/examples $ ls Adder.*
+    Adder.class  Adder.java  Adder.jj
+    root ➜ /w/examples $ java Adder '1+1'
+    2
+    root ➜ /w/examples $ java Adder '1 + 1'
+    2
+    root ➜ /w/examples $ java Adder '(1 + 1)'
+    Exception in thread "main" TokenMgrError: Lexical error at line 1, column 1.  Encountered: "(" (40), after : ""
+      at AdderTokenManager.getNextToken(AdderTokenManager.java:270)
+      at Adder.jj_consume_token(Adder.java:117)
+      at Adder.expr(Adder.java:22)
+      at Adder.evalute(Adder.java:17)
+      at Adder.main(Adder.java:8)
+    root ➜ /w/examples $
+    ```
