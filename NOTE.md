@@ -25,3 +25,59 @@
   - プリプロセッサがない #include や #define が使えない
   - 浮動小数点数関係の機能がない
   - #include の代わりに Java に似せた `import` 宣言を導入
+- 構文解析
+  - 字句解析 → 構文解析
+  - 字句解析(スキャン)：ソースコードを解析してトークンの列を生成
+    - トークン：単語 + 単語の種類 + 意味値
+    - 54, 整数, "54"
+
+    ```
+    root ➜ /w/examples $ cbc --dump-tokens hello.cb
+    "import"                "import"
+    <SPACES>                " "
+    <IDENTIFIER>            "stdio"
+    ";"                     ";"
+    <SPACES>                "\n\n"
+    "int"                   "int"
+    <SPACES>                "\n"
+    <IDENTIFIER>            "main"
+    "("                     "("
+    "int"                   "int"
+    <SPACES>                " "
+    <IDENTIFIER>            "argc"
+    ","                     ","
+    <SPACES>                " "
+    "char"                  "char"
+    <SPACES>                " "
+    "*"                     "*"
+    "*"                     "*"
+    <IDENTIFIER>            "argv"
+    ")"                     ")"
+    <SPACES>                "\n"
+    "{"                     "{"
+    <SPACES>                "\n    "
+    <IDENTIFIER>            "printf"
+    "("                     "("
+    "\""                    "\"Hello, World!\n\""
+    ")"                     ")"
+    ";"                     ";"
+    <SPACES>                "\n    "
+    "return"                "return"
+    <SPACES>                " "
+    <INTEGER>               "0"
+    ";"                     ";"
+    <SPACES>                "\n"
+    "}"                     "}"
+    <SPACES>                "\n"
+    <EOF>                   ""
+    ```
+
+  - 構文解析(パース)：スキャナが生成したトークンの列を解析して構文木を生成
+    - 実際にはセミコロンや括弧は不要としてこの時点で削除してしまうことも多い（意味解析の仕事を先に実施して、ASTにする）
+
+  - スキャナジェネレーター / パーサジェネレーター
+    - cbc では [JavaCC](https://javacc.github.io/javacc/) を使っている
+    - 人間は .jj に [EBNF (Extended Backus-Naur Form) 記法](https://ja.wikipedia.org/wiki/EBNF)で文法定義ファイルを記述
+    - パーサージェネレータには種類がある LR / LALR / LL
+      - 扱える記法の広さと生成速度・シンプルさのトレードオフ
+      - OpenCC は LL パーサジェネレーター
