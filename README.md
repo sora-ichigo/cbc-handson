@@ -30,6 +30,8 @@ cd ..
 make -C cbc test         # cbc 本体のテスト
 ```
 
+`make -C cbc test` では `vardecl.cb` の 2 件が失敗する。テストが参照する `sys_errlist` が glibc 2.32 で削除されたためで、環境の問題ではない。
+
 ## ローカルで動かす場合
 
 Rosetta ベースの amd64 コンテナ (Docker Desktop, OrbStack, colima `--vz-rosetta`) は 32bit バイナリを実行できない。
