@@ -44,6 +44,16 @@ docker build -t cbc-handson .devcontainer
 docker run --rm -it -v "$PWD:/w" -w /w -e PATH=/w/cbc/bin:/usr/bin:/bin cbc-handson bash
 ```
 
+`devcontainer.json` の `postCreateCommand` は `docker run` では実行されないので、コンテナ内で自分でビルドする。
+
+```sh
+make -C cbc
+```
+
+`cbc/lib/cbc.jar` は Git 管理外のビルド成果物なので、これを省くと
+`Could not find or load main class net.loveruby.cflat.compiler.Compiler` になる。
+ビルド後は「使い方」と同じ手順が使える。
+
 ## cbc への修正点
 
 本家 cbc は 2009 年の 32bit Linux 前提で書かれているため、以下を変更している。
