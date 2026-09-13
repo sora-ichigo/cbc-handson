@@ -3,10 +3,9 @@
   - プログラムは機械語の列
 
   ```
-  $ file /bin/ls
-  /bin/ls: Mach-O universal binary with 2 architectures: [x86_64:Mach-O 64-bit executable x86_64] [arm64e:Mach-O 64-bit executable arm64e]
-  /bin/ls (for architecture x86_64): Mach-O 64-bit executable x86_64
-  /bin/ls (for architecture arm64e): Mach-O 64-bit executable arm64e
+  root ➜ /w/examples $ cbc hello.cb
+  root ➜ /w/examples $ file hello
+  hello: ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux.so.2, for GNU/Linux 3.2.0, not stripped
   ```
 
 - 実行可能ファイルへの変換 (ビルド) プロセス
