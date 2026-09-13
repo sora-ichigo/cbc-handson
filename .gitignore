@@ -20,4 +20,5 @@ cbc/test/tc.*
 cbc/unit/*.class
 examples/*
 !examples/*.cb
+!examples/*.jj
 a.out
