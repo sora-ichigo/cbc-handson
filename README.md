@@ -22,9 +22,11 @@ gh codespace ssh
 
 ```sh
 uname -m                 # x86_64
-cbc examples/hello.cb    # a.out を生成
-file a.out               # ELF 32-bit LSB executable, Intel 80386
-./a.out                  # Hello, World!
+cd examples
+cbc hello.cb             # hello を生成
+file hello               # ELF 32-bit LSB executable, Intel 80386
+./hello                  # Hello, World!
+cd ..
 make -C cbc test         # cbc 本体のテスト
 ```
 

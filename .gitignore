@@ -18,6 +18,6 @@ cbc/test/*.s
 cbc/test/*.o
 cbc/test/tc.*
 cbc/unit/*.class
-examples/*.s
-examples/*.o
+examples/*
+!examples/*.cb
 a.out
